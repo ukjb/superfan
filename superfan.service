@@ -1,0 +1,27 @@
+[Unit]
+Description=Raspberry Pi Fan Controller
+After=multi-user.target
+Wants=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/pi-fan-controller.py
+Restart=always
+RestartSec=10
+User=root
+Group=root
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log
+
+# Environment
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
