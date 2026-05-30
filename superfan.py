@@ -17,9 +17,9 @@ TEMP_THRESHOLDS = [
     (55, 90, 180),   # temp >= 55°C: 90% speed, check every 3 min
     (50, 80, 120),   # temp >= 50°C: 80% speed, check every 2 min
     (45, 70, 90),    # temp >= 45°C: 70% speed, check every 1.5 min
-    (40, 60, 60),    # temp >= 40°C: 60% speed, check every 1 min
-    (35, 40, 60),    # temp >= 35°C: 40% speed, check every 1 min
-    (0, 25, 60)      # temp < 35°C: 25% speed, check every 1 min
+    (42, 60, 60),    # temp >= 42°C: 60% speed, check every 1 min
+    (40, 40, 60),    # temp >= 40°C: 40% speed, check every 1 min
+    (0, 5, 60)       # temp < 40°C: 5% speed, check every 1 min
 ]
 
 # Setup logging
@@ -27,8 +27,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('/var/log/pi-fan-controller.log'),
-        logging.StreamHandler(sys.stdout)
+        logging.StreamHandler(sys.stdout)  # -> journald (size-capped); view with journalctl -u superfan
     ]
 )
 
